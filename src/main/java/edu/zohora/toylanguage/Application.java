@@ -7,14 +7,28 @@ import edu.zohora.toylanguage.interpreter.TreeNode;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
         try {
-            String p1 = "x = 3; y = 2; y = x * (5 - y);";
+            Scanner scanner = new Scanner(System.in);
 
-            for (Map.Entry<String,Integer> entry : getVarsTable(p1).entrySet()) {
+            System.out.println("Type '$END' to finish.\nWrite your program below:");
+
+            StringBuilder src = new StringBuilder();
+
+            while (true) {
+                String line = scanner.nextLine();
+                if (line.compareTo("$END") == 0) {
+                    break;
+                }
+
+                src.append(line);
+            }
+
+            for (Map.Entry<String,Integer> entry : getVarsTable(src.toString()).entrySet()) {
                 System.out.println(entry.getKey() + " = " + entry.getValue());
             }
 
